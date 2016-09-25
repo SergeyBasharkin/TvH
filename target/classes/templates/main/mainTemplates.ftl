@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <@m_body />
+    <@m_body/>
 
 </body>
 </html>

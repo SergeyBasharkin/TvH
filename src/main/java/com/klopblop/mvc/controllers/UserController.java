@@ -37,8 +37,14 @@ public class UserController {
     public String signUp(
             @Valid @ModelAttribute("singUpForm") RegistrationFormBean registrationFormBean,
             BindingResult bindingResult, Model model) {
+
         if (bindingResult.hasErrors()) {
-            model.addAttribute("error", bindingResult.getFieldErrors().get(0).getField());
+            model.addAttribute("errorp", bindingResult.getFieldErrors(registrationFormBean.getName()));
+            model.addAttribute("nameError",bindingResult.getFieldError("name"));
+            model.addAttribute("emailError",bindingResult.getFieldError("email"));
+            model.addAttribute("passwordError",bindingResult.getFieldError("password"));
+            model.addAttribute("validError",bindingResult.getFieldError("valid"));
+            model.addAttribute("errors",bindingResult);
             return "registration/registrationPage";
         }
         String hashPassword = DigestUtils.md2Hex(registrationFormBean.getPassword());
